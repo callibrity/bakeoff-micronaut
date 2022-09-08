@@ -1,0 +1,7 @@
+micronaut:
+  application:
+    name: bakeoff
+netty:
+  default:
+    allocator:
+      max-order: 3
