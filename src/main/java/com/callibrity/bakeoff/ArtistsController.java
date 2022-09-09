@@ -26,7 +26,7 @@ public class ArtistsController {
                 .orElseThrow(() -> new HttpStatusException(HttpStatus.NOT_FOUND, "Artist not found."));
     }
 
-    @Post
+    @Post(consumes = "application/json")
     public Artist create(@Body CreateArtistRequest request) {
         final Artist artist = new Artist();
         artist.setName(request.getName());
@@ -40,7 +40,7 @@ public class ArtistsController {
         repository.deleteById(id);
     }
 
-    @Put("/{id}")
+    @Put(value = "/{id}", consumes = "application/json")
     public Artist update(@PathVariable("id") String id, @Body UpdateArtistRequest request) {
         Artist artist = repository.findById(id)
                 .orElseThrow(() -> new HttpStatusException(HttpStatus.NOT_FOUND, "Artist not found."));
