@@ -5,24 +5,24 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
-import jakarta.inject.Inject;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @ExecuteOn(TaskExecutors.IO)
 @Controller("/api/artists")
+@RequiredArgsConstructor
 public class ArtistsController {
 
 // ------------------------------ FIELDS ------------------------------
 
-    @Inject
-    private ArtistService service;
+    private final ArtistService service;
 
 // -------------------------- OTHER METHODS --------------------------
 
     @Post(consumes = "application/json")
     public Artist create(@Body CreateArtistRequest request) {
-        return service.createArtist(request.getName(), request.getGenre());
+        return service.createArtist(request.name(), request.genre());
     }
 
     @Delete("/{id}")
@@ -43,7 +43,7 @@ public class ArtistsController {
 
     @Put(value = "/{id}", consumes = "application/json")
     public Artist update(@PathVariable("id") String id, @Body UpdateArtistRequest request) {
-        return service.updateArtist(id, request.getName(), request.getGenre())
+        return service.updateArtist(id, request.name(), request.genre())
                 .orElseThrow(() -> new HttpStatusException(HttpStatus.NOT_FOUND, "Artist not found."));
     }
 

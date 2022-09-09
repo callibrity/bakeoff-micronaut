@@ -1,31 +1,14 @@
 package com.callibrity.bakeoff;
 
 import io.micronaut.core.annotation.Introspected;
+import io.micronaut.core.annotation.ReflectiveAccess;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 @Introspected
-public class UpdateArtistRequest {
-
-// ------------------------------ FIELDS ------------------------------
-
-    private String name;
-    private Genre genre;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+@ReflectiveAccess
+public record UpdateArtistRequest(@NotEmpty String name, @NotNull Genre genre) {
 
 }

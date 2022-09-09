@@ -1,7 +1,7 @@
 package com.callibrity.bakeoff;
 
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import lombok.RequiredArgsConstructor;
 
 import javax.transaction.Transactional;
 import java.util.LinkedList;
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
+@RequiredArgsConstructor
 public class ArtistService {
 
 // ------------------------------ FIELDS ------------------------------
 
-    @Inject
-    private ArtistRepository repository;
+    private final ArtistRepository repository;
 
 // -------------------------- OTHER METHODS --------------------------
 

@@ -1,12 +1,20 @@
 package com.callibrity.bakeoff;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.core.annotation.Introspected;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
-
+@Data
+@EqualsAndHashCode(of="id")
 @Entity
 @Introspected
 public class Artist {
@@ -14,64 +22,14 @@ public class Artist {
 // ------------------------------ FIELDS ------------------------------
 
     @Id
+    @Setter(AccessLevel.PROTECTED)
     private String id = UUID.randomUUID().toString();
 
+    @NotEmpty
     private String name;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Genre genre;
-
-    @Version
-    @JsonIgnore
-    private Long version;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-// ------------------------ CANONICAL METHODS ------------------------
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Artist artist = (Artist) o;
-        return id.equals(artist.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 
 }
