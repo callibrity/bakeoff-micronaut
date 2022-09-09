@@ -1,8 +1,6 @@
 package com.callibrity.bakeoff;
 
 import io.micronaut.core.annotation.Introspected;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
