@@ -1,8 +1,6 @@
 micronaut:
   application:
     name: bakeoff-micronaut
-  server:
-    port: ${PORT:8080}
 netty:
   default:
     allocator:
