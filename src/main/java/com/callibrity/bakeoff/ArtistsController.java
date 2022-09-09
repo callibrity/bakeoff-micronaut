@@ -3,10 +3,13 @@ package com.callibrity.bakeoff;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.exceptions.HttpStatusException;
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
 import jakarta.inject.Inject;
 
 import java.util.List;
 
+@ExecuteOn(TaskExecutors.IO)
 @Controller("/api/artists")
 public class ArtistsController {
 
