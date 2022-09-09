@@ -27,7 +27,7 @@ public class ArtistsController {
     }
 
     @Post
-    public Artist create(CreateArtistRequest request) {
+    public Artist create(@Body CreateArtistRequest request) {
         final Artist artist = new Artist();
         artist.setName(request.getName());
         artist.setGenre(request.getGenre());
@@ -41,7 +41,7 @@ public class ArtistsController {
     }
 
     @Put("/{id}")
-    public Artist update(@PathVariable("id") String id, UpdateArtistRequest request) {
+    public Artist update(@PathVariable("id") String id, @Body UpdateArtistRequest request) {
         Artist artist = repository.findById(id)
                 .orElseThrow(() -> new HttpStatusException(HttpStatus.NOT_FOUND, "Artist not found."));
         artist.setName(request.getName());
