@@ -1,17 +1,17 @@
 package com.callibrity.bakeoff;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.core.annotation.Introspected;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Introspected
 public class Artist {
+
+// ------------------------------ FIELDS ------------------------------
 
     @Id
     private String id = UUID.randomUUID().toString();
@@ -20,6 +20,20 @@ public class Artist {
 
     @Enumerated(EnumType.STRING)
     private Genre genre;
+
+    @Version
+    @JsonIgnore
+    private Long version;
+
+// --------------------- GETTER / SETTER METHODS ---------------------
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 
     public String getId() {
         return id;
@@ -37,13 +51,15 @@ public class Artist {
         this.name = name;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public Long getVersion() {
+        return version;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setVersion(Long version) {
+        this.version = version;
     }
+
+// ------------------------ CANONICAL METHODS ------------------------
 
     @Override
     public boolean equals(Object o) {
@@ -57,4 +73,5 @@ public class Artist {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
